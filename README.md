@@ -529,38 +529,38 @@ Docker Hub: https://hub.docker.com/r/rushi5706/ccip-nft-bridge-cli
 
 ## Project Structure
 
-```
-/
-+-- src/
-|   +-- CrossChainNFT.sol              ERC721URIStorage + Ownable, bridge-only mint/burn
-|   +-- CCIPNFTBridge.sol              CCIPReceiver with burn-mint logic, LINK fees
-+-- script/
-|   +-- DeployFuji.s.sol               Fuji deployment (NFT + Bridge + mint tokenId=1)
-|   +-- DeployArbitrumSepolia.s.sol    Arbitrum Sepolia deployment (NFT + Bridge)
-|   +-- Configure.s.sol               Set trusted remotes on both chains
-+-- test/
-|   +-- CrossChainNFTTest.t.sol        7 tests for NFT access control and mint/burn
-|   +-- CCIPNFTBridgeTest.t.sol        5 tests for bridge send/receive/idempotency
-+-- cli/
-|   +-- transfer.js                    Node.js CLI for cross-chain NFT transfers
-|   +-- abis/                          Committed ABI files for Docker compatibility
-+-- data/
-|   +-- nft_transfers.json             JSON transfer records (starts as [])
-+-- logs/
-|   +-- transfers.log                  Operation log file
-+-- metadata/
-|   +-- 1.json                         NFT metadata for tokenId=1
-+-- lib/                               Foundry dependencies (OpenZeppelin, Chainlink, forge-std)
-+-- deployment.json                    Real deployed contract addresses
-+-- foundry.toml                       Foundry config with remappings
-+-- package.json                       Node.js dependencies and scripts
-+-- package-lock.json                  Locked dependency versions
-+-- Dockerfile                         Docker image for CLI
-+-- docker-compose.yml                 Docker Compose service config
-+-- .env.example                       Environment variable template
-+-- .dockerignore                      Docker build exclusions
-+-- .gitignore                         Git exclusions
-+-- README.md                          This file
+```text
+.
+├── src/
+│   ├── CrossChainNFT.sol              # ERC721URIStorage + Ownable, bridge-only mint/burn
+│   └── CCIPNFTBridge.sol              # CCIPReceiver with burn-mint logic, LINK fees
+├── script/
+│   ├── DeployFuji.s.sol               # Fuji deployment (NFT + Bridge + mint tokenId=1)
+│   ├── DeployArbitrumSepolia.s.sol    # Arbitrum Sepolia deployment (NFT + Bridge)
+│   └── Configure.s.sol                # Set trusted remotes on both chains
+├── test/
+│   ├── CrossChainNFTTest.t.sol        # 7 tests for NFT access control and mint/burn
+│   └── CCIPNFTBridgeTest.t.sol        # 5 tests for bridge send/receive/idempotency
+├── cli/
+│   ├── transfer.js                    # Node.js CLI for cross-chain NFT transfers
+│   └── abis/                          # Committed ABI files for Docker compatibility
+├── data/
+│   └── nft_transfers.json             # JSON transfer records (starts as [])
+├── logs/
+│   └── transfers.log                  # Operation log file
+├── metadata/
+│   └── 1.json                         # NFT metadata for tokenId=1
+├── lib/                               # Foundry dependencies (OpenZeppelin, Chainlink, forge-std)
+├── deployment.json                    # Real deployed contract addresses
+├── foundry.toml                       # Foundry config with remappings
+├── package.json                       # Node.js dependencies and scripts
+├── package-lock.json                  # Locked dependency versions
+├── Dockerfile                         # Docker image for CLI
+├── docker-compose.yml                 # Docker Compose service config
+├── .env.example                       # Environment variable template
+├── .dockerignore                      # Docker build exclusions
+├── .gitignore                         # Git exclusions
+└── README.md                          # This file
 ```
 
 ---

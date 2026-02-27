@@ -5,3 +5,4 @@ cache/
 broadcast/
 .DS_Store
 !logs/
+!data/
