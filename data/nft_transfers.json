@@ -1,20 +1,20 @@
 [
-  {
-    "transferId": "eaad3408-cd06-4da3-af53-62cc15deaebe",
-    "tokenId": "1",
-    "sourceChain": "avalanche-fuji",
-    "destinationChain": "arbitrum-sepolia",
-    "sender": "0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80",
-    "receiver": "0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80",
-    "ccipMessageId": "0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9",
-    "sourceTxHash": "0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a",
-    "destinationTxHash": null,
-    "status": "initiated",
-    "metadata": {
-      "name": "CrossChainNFT #1",
-      "description": "",
-      "image": ""
-    },
-    "timestamp": "2026-02-27T12:08:37.484Z"
-  }
+    {
+        "transferId": "eaad3408-cd06-4da3-af53-62cc15deaebe",
+        "tokenId": "1",
+        "sourceChain": "avalanche-fuji",
+        "destinationChain": "arbitrum-sepolia",
+        "sender": "0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80",
+        "receiver": "0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80",
+        "ccipMessageId": "0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9",
+        "sourceTxHash": "0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a",
+        "destinationTxHash": null,
+        "status": "initiated",
+        "metadata": {
+            "name": "CrossChainNFT #1",
+            "description": "A cross-chain NFT bridged using Chainlink CCIP",
+            "image": "https://ipfs.io/ipfs/QmXoypizjW3WknFiJnKLwHCnL72vedxjQkDDP1mXWo6uco/I/m/Vincent_van_Gogh_-_Self-Portrait_-_Google_Art_Project.jpg"
+        },
+        "timestamp": "2026-02-27T12:08:37.484Z"
+    }
 ]
