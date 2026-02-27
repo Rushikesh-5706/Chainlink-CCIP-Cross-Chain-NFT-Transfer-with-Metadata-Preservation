@@ -384,7 +384,7 @@ npm run transfer -- --tokenId=2 --from=avalanche-fuji --to=arbitrum-sepolia --re
 ### Expected CLI Output
 
 ```
-[2026-02-27 17:38:13] INFO: Transfer started: tokenId=1 from=avalanche-fuji to=arbitrum-sepolia receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+[2026-02-27 17:38:13] INFO: Transfer started: tokenId=2 from=avalanche-fuji to=arbitrum-sepolia receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
 [2026-02-27 17:38:14] INFO: Connected as: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
 [2026-02-27 17:38:15] INFO: Estimated CCIP fee: 0.013795512195820377 LINK
 [2026-02-27 17:38:15] INFO: Approving LINK token for bridge...
