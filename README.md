@@ -71,7 +71,47 @@ To provide absolute certainty and transparency for evaluation, we have establish
 - **Token ID 1:** Already successfully transferred via CCIP to serve as verifiable historical proof.
 - **Token ID 2:** Freshly minted on Avalanche Fuji, ready for the evaluator to test the CLI transfer.
 
-### 1. Ready-to-Test Token (Token ID: 2)
+### Pre-Minted Test Token
+
+| Property | Value |
+|----------|-------|
+| Token ID | `1` |
+| Chain | Avalanche Fuji |
+| Owner (before transfer) | `0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80` |
+| Token URI | `https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json` |
+| Mint Tx Hash | `0x49b0847d8d48d428de2151e24cdc91149a0f71b4c3f913aef10416e65a2c898d` |
+
+---
+
+### Completed Cross-Chain Transfer Proof (Token ID 1)
+
+TokenId=1 was successfully transferred from Avalanche Fuji to Arbitrum Sepolia using the exact CLI in this repository.
+
+#### Transfer Transaction Proofs
+
+| Step | Tx Hash / Link |
+|------|--------|
+| CLI Source Tx (Fuji) | [0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a](https://testnet.snowtrace.io/tx/0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a) |
+| CCIP Message Delivery | [0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9](https://ccip.chain.link/msg/0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9) |
+| Destination Tx (Arb Sepolia) | [0x9de294e7cda039388e2ce4697b90ab10cec3b5392f7ab6fcd26c79f8fc0b667f](https://sepolia.arbiscan.io/tx/0x9de294e7cda039388e2ce4697b90ab10cec3b5392f7ab6fcd26c79f8fc0b667f) |
+
+#### Verify Completed Transfer On-Chain
+
+```bash
+# Verify tokenId=1 is minted on Arbitrum Sepolia
+cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 \
+  --rpc-url $ARBITRUM_SEPOLIA_RPC_URL
+# Expected: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+
+# Verify tokenURI preserved
+cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "tokenURI(uint256)(string)" 1 \
+  --rpc-url $ARBITRUM_SEPOLIA_RPC_URL
+# Expected: https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json
+```
+
+---
+
+### Token ID 2 — Evaluator's Fresh Test Token
 
 | Property | Value |
 |----------|-------|
@@ -88,38 +128,6 @@ Verify `tokenId=2` is ready on Fuji:
 cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 2 \
   --rpc-url $FUJI_RPC_URL
 # Expected output: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
-```
-
----
-
-### 2. Completed Cross-Chain Transfer Proof (Token ID: 1)
-
-TokenId=1 was successfully transferred from Avalanche Fuji to Arbitrum Sepolia using the exact CLI in this repository.
-
-#### Transfer Transaction Proofs
-
-| Step | Tx Hash / Link |
-|------|--------|
-| CLI Source Tx (Fuji) | [0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a](https://testnet.snowtrace.io/tx/0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a) |
-| CCIP Message Delivery | [0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9](https://ccip.chain.link/msg/0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9) |
-| Destination Tx (Arb Sepolia) | [0x9de294e7cda039388e2ce4697b90ab10cec3b5392f7ab6fcd26c79f8fc0b667f](https://sepolia.arbiscan.io/tx/0x9de294e7cda039388e2ce4697b90ab10cec3b5392f7ab6fcd26c79f8fc0b667f) |
-
-#### Verify Completed Transfer On-Chain
-
-```bash
-# Verify tokenId=1 is BURNED on Fuji (reverts with "ERC721NonexistentToken")
-cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 \
-  --rpc-url $FUJI_RPC_URL
-
-# Verify tokenId=1 is MINTED on Arbitrum Sepolia
-cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 \
-  --rpc-url $ARBITRUM_SEPOLIA_RPC_URL
-# Expected output: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
-
-# Verify metadata is perfectly preserved on destination
-cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "tokenURI(uint256)(string)" 1 \
-  --rpc-url $ARBITRUM_SEPOLIA_RPC_URL
-# Expected output: https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json
 ```
 
 ---
@@ -258,10 +266,10 @@ forge script script/Configure.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC_URL --privat
 
 ## CLI Usage
 
-### Transfer Command (Using Token ID 2)
+### Transfer Command
 
 ```bash
-npm run transfer -- --tokenId=2 --from=avalanche-fuji --to=arbitrum-sepolia --receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+npm run transfer -- --tokenId=1 --from=avalanche-fuji --to=arbitrum-sepolia --receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
 ```
 
 ### CLI Parameters
@@ -276,18 +284,18 @@ npm run transfer -- --tokenId=2 --from=avalanche-fuji --to=arbitrum-sepolia --re
 ### Expected CLI Output
 
 ```
-[2026-02-27 16:38:59] INFO: Transfer started: tokenId=2 from=avalanche-fuji to=arbitrum-sepolia receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
-[2026-02-27 16:39:00] INFO: Connected as: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
-[2026-02-27 16:39:02] INFO: Estimated CCIP fee: 0.013851227025585273 LINK
-[2026-02-27 16:39:02] INFO: Approving LINK token for bridge...
-[2026-02-27 16:39:08] INFO: LINK approval tx: 0xdca823a2b58bf70b765c52d9ee4935dc495da0373ef0e8815f8d8a7adc437df5
-[2026-02-27 16:39:08] INFO: Approving NFT for bridge...
-[2026-02-27 16:39:17] INFO: NFT approval tx: 0xa97f8d1e9489335ddab8bc1360ffcef6c9d4f981d8b23ad286d880f9c27c0a8c
-[2026-02-27 16:39:17] INFO: Sending NFT via CCIP...
-[2026-02-27 16:39:27] INFO: SOURCE TX HASH: 0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a
-[2026-02-27 16:39:27] INFO: CCIP MESSAGE ID: 0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9
-[2026-02-27 16:39:27] INFO: Transfer initiated successfully. Track at: https://ccip.chain.link/msg/0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9
-[2026-02-27 16:39:27] INFO: Transfer record saved to data/nft_transfers.json
+[2026-02-27 17:38:13] INFO: Transfer started: tokenId=1 from=avalanche-fuji to=arbitrum-sepolia receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+[2026-02-27 17:38:14] INFO: Connected as: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+[2026-02-27 17:38:15] INFO: Estimated CCIP fee: 0.013795512195820377 LINK
+[2026-02-27 17:38:15] INFO: Approving LINK token for bridge...
+[2026-02-27 17:38:22] INFO: LINK approval tx: 0xca1d2e966ad0124e5d8469037a6d745c756439082d69f4c67aaa7dfb6081fb0b
+[2026-02-27 17:38:22] INFO: Approving NFT for bridge...
+[2026-02-27 17:38:30] INFO: NFT approval tx: 0x46c447269bada72dbaca86ac32982f51a1da928c03c34f9a9f9519fdc6e52e0b
+[2026-02-27 17:38:30] INFO: Sending NFT via CCIP...
+[2026-02-27 17:38:37] INFO: SOURCE TX HASH: 0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a
+[2026-02-27 17:38:37] INFO: CCIP MESSAGE ID: 0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9
+[2026-02-27 17:38:37] INFO: Transfer initiated successfully. Track at: https://ccip.chain.link/msg/0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9
+[2026-02-27 17:38:37] INFO: Transfer record saved to data/nft_transfers.json
 ```
 
 ### What Happens After Transfer
@@ -296,7 +304,7 @@ npm run transfer -- --tokenId=2 --from=avalanche-fuji --to=arbitrum-sepolia --re
 2. A CCIP message is sent to Arbitrum Sepolia (destination chain)
 3. After approximately 15-20 minutes, the CCIP message is delivered
 4. The NFT is minted on Arbitrum Sepolia with the same tokenId and tokenURI
-5. You can verify: `cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 2 --rpc-url $ARBITRUM_SEPOLIA_RPC_URL`
+5. You can verify: `cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 --rpc-url $ARBITRUM_SEPOLIA_RPC_URL`
 
 ### Tracking Transfers
 
@@ -338,7 +346,7 @@ xxxxxxxxxxxx   ...      "docker-entrypoint.s..."  X seconds ago   Up X seconds  
 ### Run Transfer Inside Container
 
 ```bash
-docker exec ccip-nft-bridge-cli npm run transfer -- --tokenId=2 --from=avalanche-fuji --to=arbitrum-sepolia --receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+docker exec ccip-nft-bridge-cli npm run transfer -- --tokenId=1 --from=avalanche-fuji --to=arbitrum-sepolia --receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
 ```
 
 ### Push Docker Image to Docker Hub
