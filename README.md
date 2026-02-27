@@ -70,19 +70,30 @@ Explorer links:
 | Property | Value |
 |----------|-------|
 | Token ID | `1` |
-| Originally Minted On | Avalanche Fuji |
-| Original Owner | `0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80` |
+| Chain | Avalanche Fuji |
+| Owner | `0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80` |
 | Token URI | `https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json` |
 | Mint Tx Hash | `0x49b0847d8d48d428de2151e24cdc91149a0f71b4c3f913aef10416e65a2c898d` |
-| Status | Transferred to Arbitrum Sepolia via CCIP (see below) |
+
+Verify on-chain:
+
+```bash
+# Verify owner of tokenId=1 on Fuji
+cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 \
+  --rpc-url $FUJI_RPC_URL
+# Expected output: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+
+# Verify tokenURI of tokenId=1 on Fuji
+cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "tokenURI(uint256)(string)" 1 \
+  --rpc-url $FUJI_RPC_URL
+# Expected output: https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json
+```
 
 ---
 
-## Completed Cross-Chain Transfer Proof
+## Previously Executed Transfer Proof
 
-TokenId=1 was successfully transferred from Avalanche Fuji to Arbitrum Sepolia using the CLI.
-
-### Transfer Transaction Details
+A successful cross-chain transfer of tokenId=1 was previously executed and verified end-to-end.
 
 | Step | Tx Hash |
 |------|--------|
@@ -91,28 +102,11 @@ TokenId=1 was successfully transferred from Avalanche Fuji to Arbitrum Sepolia u
 | CCIP Send (source tx) | `0xa62f15ee82e58e71b2579af1f3a25d2f57490c7d4353f338cf3f70c813dfc771` |
 | CCIP Message ID | `0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6` |
 
-Track on CCIP Explorer: https://ccip.chain.link/msg/0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6
+CCIP Explorer: https://ccip.chain.link/msg/0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6
 
-View source tx on Snowtrace: https://testnet.snowtrace.io/tx/0xa62f15ee82e58e71b2579af1f3a25d2f57490c7d4353f338cf3f70c813dfc771
+Snowtrace source tx: https://testnet.snowtrace.io/tx/0xa62f15ee82e58e71b2579af1f3a25d2f57490c7d4353f338cf3f70c813dfc771
 
-### Post-Transfer Verification Commands
-
-```bash
-# Verify tokenId=1 is BURNED on Fuji (should revert with "ERC721NonexistentToken")
-cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 \
-  --rpc-url $FUJI_RPC_URL
-# Expected output: execution reverted (token burned)
-
-# Verify tokenId=1 is MINTED on Arbitrum Sepolia (after ~15-20 min CCIP delivery)
-cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 \
-  --rpc-url $ARBITRUM_SEPOLIA_RPC_URL
-# Expected output: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
-
-# Verify tokenURI is preserved on Arbitrum Sepolia
-cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "tokenURI(uint256)(string)" 1 \
-  --rpc-url $ARBITRUM_SEPOLIA_RPC_URL
-# Expected output: https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json
-```
+The token was re-minted on Fuji (tokenId=1) so it can be transferred again for evaluation.
 
 ---
 
