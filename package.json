@@ -1,0 +1,17 @@
+{
+    "name": "ccip-nft-bridge",
+    "version": "1.0.0",
+    "description": "Chainlink CCIP Cross-Chain NFT Bridge with Metadata Preservation",
+    "main": "cli/transfer.js",
+    "scripts": {
+        "transfer": "node cli/transfer.js"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.7",
+        "ethers": "^6.13.4",
+        "uuid": "^9.0.1",
+        "winston": "^3.17.0",
+        "yargs": "^17.7.2"
+    },
+    "license": "MIT"
+}
