@@ -369,7 +369,7 @@ forge script script/Configure.s.sol --rpc-url $ARBITRUM_SEPOLIA_RPC_URL --privat
 ### Transfer Command
 
 ```bash
-npm run transfer -- --tokenId=1 --from=avalanche-fuji --to=arbitrum-sepolia --receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+npm run transfer -- --tokenId=2 --from=avalanche-fuji --to=arbitrum-sepolia --receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
 ```
 
 ### CLI Parameters
@@ -446,7 +446,7 @@ xxxxxxxxxxxx   ...      "docker-entrypoint.s..."  X seconds ago   Up X seconds  
 ### Run Transfer Inside Container
 
 ```bash
-docker exec ccip-nft-bridge-cli npm run transfer -- --tokenId=1 --from=avalanche-fuji --to=arbitrum-sepolia --receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+docker exec ccip-nft-bridge-cli npm run transfer -- --tokenId=2 --from=avalanche-fuji --to=arbitrum-sepolia --receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
 ```
 
 ### Push Docker Image to Docker Hub
