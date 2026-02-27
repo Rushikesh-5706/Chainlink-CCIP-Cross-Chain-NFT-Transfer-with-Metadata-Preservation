@@ -116,11 +116,11 @@ async function main() {
   }
 
   // Load ABIs from Foundry compiled output
-  const bridgeArtifactPath = path.join(__dirname, '..', 'out', 'CCIPNFTBridge.sol', 'CCIPNFTBridge.json');
-  const nftArtifactPath = path.join(__dirname, '..', 'out', 'CrossChainNFT.sol', 'CrossChainNFT.json');
+  const bridgeArtifactPath = path.join(__dirname, 'abis', 'CCIPNFTBridge.json');
+  const nftArtifactPath = path.join(__dirname, 'abis', 'CrossChainNFT.json');
 
   if (!fs.existsSync(bridgeArtifactPath) || !fs.existsSync(nftArtifactPath)) {
-    logger.error('Compiled contract artifacts not found. Run "forge build" first.');
+    logger.error('ABI files not found in cli/abis/. Repository may be corrupted.');
     process.exit(1);
   }
 
