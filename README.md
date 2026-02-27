@@ -10,7 +10,7 @@ A production-grade cross-chain NFT bridge that transfers ERC-721 NFTs between **
 Source Chain (Avalanche Fuji)                          Destination Chain (Arbitrum Sepolia)
 +---------------------------+                          +-------------------------------+
 |                           |     Chainlink CCIP       |                               |
-|  1. User approves NFT     |  ------------------->   |  5. CCIPReceiver triggered     |
+|  1. User approves NFT     |  ------------------->    |  5. CCIPReceiver triggered    |
 |  2. User approves LINK    |   Encoded payload:       |  6. Validate trusted remote   |
 |  3. Bridge burns NFT      |   (receiver, tokenId,    |  7. Idempotency check         |
 |  4. Bridge sends CCIP msg |    tokenURI)             |  8. Mint NFT with same ID     |
