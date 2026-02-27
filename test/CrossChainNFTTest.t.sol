@@ -29,18 +29,14 @@ contract CrossChainNFTTest is Test {
         assertEq(nft.bridge(), bridge);
     }
 
-    function test_OnlyBridgeOrOwnerCanMint() public {
+    function test_OnlyBridgeCanMint() public {
         vm.prank(user);
-        vm.expectRevert("Not bridge or owner");
+        vm.expectRevert("Caller is not the bridge");
         nft.mint(user, 1, "https://example.com/1.json");
 
         vm.prank(bridge);
         nft.mint(user, 1, "https://example.com/1.json");
         assertEq(nft.ownerOf(1), user);
-        
-        vm.prank(owner);
-        nft.mint(user, 2, "https://example.com/2.json");
-        assertEq(nft.ownerOf(2), user);
     }
 
     function test_MintSetsTokenURI() public {

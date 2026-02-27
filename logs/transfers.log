@@ -12,3 +12,6 @@
 [2026-02-27 17:38:37] INFO: CCIP MESSAGE ID: 0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9
 [2026-02-27 17:38:37] INFO: Transfer initiated successfully. Track at: https://ccip.chain.link/msg/0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9
 [2026-02-27 17:38:37] INFO: Transfer record saved to data/nft_transfers.json
+[2026-02-27 12:15:04] INFO: Transfer started: tokenId=1 from=avalanche-fuji to=arbitrum-sepolia receiver=0x0000000000000000000000000000000000000000
+[2026-02-27 12:15:05] INFO: Connected as: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+[2026-02-27 12:15:05] ERROR: Token #1 does not exist on source chain

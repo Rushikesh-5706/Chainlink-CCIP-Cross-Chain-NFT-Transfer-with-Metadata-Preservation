@@ -23,8 +23,7 @@ contract CrossChainNFT is ERC721URIStorage, Ownable {
         bridge = _bridge;
     }
 
-    function mint(address to, uint256 tokenId, string memory tokenURI_) external {
-        require(msg.sender == bridge || msg.sender == owner(), "Not bridge or owner");
+    function mint(address to, uint256 tokenId, string memory tokenURI_) external onlyBridge {
         _safeMint(to, tokenId);
         _setTokenURI(tokenId, tokenURI_);
     }
