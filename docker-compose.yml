@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  cli:
+    build: .
+    container_name: ccip-nft-bridge-cli
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    env_file:
+      - .env
+    tty: true
