@@ -102,7 +102,7 @@ TokenId=1 was successfully transferred from Avalanche Fuji to Arbitrum Sepolia u
 |------|--------|
 | CLI Source Tx (Fuji) | [0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a](https://testnet.snowtrace.io/tx/0x94249bb6340c5f2a8d892aa63a33e6993286e92d82ec6ca0bdb8f5af371cc12a) |
 | CCIP Message Delivery | [0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9](https://ccip.chain.link/msg/0xf9646aaac1c4d9c137c5886ad3d64bb25a33b5030581cfc57ddf5703e3eef9c9) |
-| Destination Tx (Arb Sepolia) | [0xcc7cb92d24227394874312ce100a89d364022a101b0a7019f29845701fa14f3b](https://sepolia.arbiscan.io/tx/0xcc7cb92d24227394874312ce100a89d364022a101b0a7019f29845701fa14f3b) |
+| Destination Tx (Arb Sepolia) | [0x9de294e7cda039388e2ce4697b90ab10cec3b5392f7ab6fcd26c79f8fc0b667f](https://sepolia.arbiscan.io/tx/0x9de294e7cda039388e2ce4697b90ab10cec3b5392f7ab6fcd26c79f8fc0b667f) |
 
 #### Verify Completed Transfer On-Chain
 
