@@ -70,22 +70,47 @@ Explorer links:
 | Property | Value |
 |----------|-------|
 | Token ID | `1` |
-| Chain | Avalanche Fuji |
-| Owner | `0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80` |
+| Originally Minted On | Avalanche Fuji |
+| Original Owner | `0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80` |
 | Token URI | `https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json` |
 | Mint Tx Hash | `0x49b0847d8d48d428de2151e24cdc91149a0f71b4c3f913aef10416e65a2c898d` |
+| Status | Transferred to Arbitrum Sepolia via CCIP (see below) |
 
-You can verify on-chain:
+---
+
+## Completed Cross-Chain Transfer Proof
+
+TokenId=1 was successfully transferred from Avalanche Fuji to Arbitrum Sepolia using the CLI.
+
+### Transfer Transaction Details
+
+| Step | Tx Hash |
+|------|--------|
+| LINK Approval | `0xdca823a2b58bf70b765c52d9ee4935dc495da0373ef0e8815f8d8a7adc437df5` |
+| NFT Approval | `0xa97f8d1e9489335ddab8bc1360ffcef6c9d4f981d8b23ad286d880f9c27c0a8c` |
+| CCIP Send (source tx) | `0xa62f15ee82e58e71b2579af1f3a25d2f57490c7d4353f338cf3f70c813dfc771` |
+| CCIP Message ID | `0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6` |
+
+Track on CCIP Explorer: https://ccip.chain.link/msg/0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6
+
+View source tx on Snowtrace: https://testnet.snowtrace.io/tx/0xa62f15ee82e58e71b2579af1f3a25d2f57490c7d4353f338cf3f70c813dfc771
+
+### Post-Transfer Verification Commands
 
 ```bash
-# Verify owner of tokenId=1 on Fuji
+# Verify tokenId=1 is BURNED on Fuji (should revert with "ERC721NonexistentToken")
 cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 \
-  --rpc-url https://avax-fuji.g.alchemy.com/v2/YOUR_KEY
+  --rpc-url $FUJI_RPC_URL
+# Expected output: execution reverted (token burned)
+
+# Verify tokenId=1 is MINTED on Arbitrum Sepolia (after ~15-20 min CCIP delivery)
+cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "ownerOf(uint256)(address)" 1 \
+  --rpc-url $ARBITRUM_SEPOLIA_RPC_URL
 # Expected output: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
 
-# Verify tokenURI of tokenId=1 on Fuji
+# Verify tokenURI is preserved on Arbitrum Sepolia
 cast call 0x28d83b3c8f1a99a5ae5ae356dd64509e3dad73e8 "tokenURI(uint256)(string)" 1 \
-  --rpc-url https://avax-fuji.g.alchemy.com/v2/YOUR_KEY
+  --rpc-url $ARBITRUM_SEPOLIA_RPC_URL
 # Expected output: https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json
 ```
 
@@ -240,21 +265,21 @@ npm run transfer -- --tokenId=1 --from=avalanche-fuji --to=arbitrum-sepolia --re
 | `--to` | string | Yes | Destination chain: `arbitrum-sepolia` |
 | `--receiver` | string | Yes | Receiver address on destination chain (must be valid Ethereum address) |
 
-### Expected CLI Output
+### Actual CLI Output (from executed transfer)
 
 ```
-[2026-02-27 16:00:00] INFO: Transfer started: tokenId=1 from=avalanche-fuji to=arbitrum-sepolia receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
-[2026-02-27 16:00:01] INFO: Connected as: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
-[2026-02-27 16:00:02] INFO: Estimated CCIP fee: 0.0XXX LINK
-[2026-02-27 16:00:03] INFO: Approving LINK token for bridge...
-[2026-02-27 16:00:10] INFO: LINK approval tx: 0x<real_tx_hash>
-[2026-02-27 16:00:11] INFO: Approving NFT for bridge...
-[2026-02-27 16:00:18] INFO: NFT approval tx: 0x<real_tx_hash>
-[2026-02-27 16:00:19] INFO: Sending NFT via CCIP...
-[2026-02-27 16:00:30] INFO: SOURCE TX HASH: 0x<real_tx_hash>
-[2026-02-27 16:00:30] INFO: CCIP MESSAGE ID: 0x<real_ccip_message_id>
-[2026-02-27 16:00:30] INFO: Transfer initiated successfully. Track at: https://ccip.chain.link/msg/0x<ccip_message_id>
-[2026-02-27 16:00:30] INFO: Transfer record saved to data/nft_transfers.json
+[2026-02-27 16:38:59] INFO: Transfer started: tokenId=1 from=avalanche-fuji to=arbitrum-sepolia receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+[2026-02-27 16:39:00] INFO: Connected as: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+[2026-02-27 16:39:02] INFO: Estimated CCIP fee: 0.013851227025585273 LINK
+[2026-02-27 16:39:02] INFO: Approving LINK token for bridge...
+[2026-02-27 16:39:08] INFO: LINK approval tx: 0xdca823a2b58bf70b765c52d9ee4935dc495da0373ef0e8815f8d8a7adc437df5
+[2026-02-27 16:39:08] INFO: Approving NFT for bridge...
+[2026-02-27 16:39:17] INFO: NFT approval tx: 0xa97f8d1e9489335ddab8bc1360ffcef6c9d4f981d8b23ad286d880f9c27c0a8c
+[2026-02-27 16:39:17] INFO: Sending NFT via CCIP...
+[2026-02-27 16:39:27] INFO: SOURCE TX HASH: 0xa62f15ee82e58e71b2579af1f3a25d2f57490c7d4353f338cf3f70c813dfc771
+[2026-02-27 16:39:27] INFO: CCIP MESSAGE ID: 0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6
+[2026-02-27 16:39:27] INFO: Transfer initiated successfully. Track at: https://ccip.chain.link/msg/0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6
+[2026-02-27 16:39:27] INFO: Transfer record saved to data/nft_transfers.json
 ```
 
 ### What Happens After Transfer

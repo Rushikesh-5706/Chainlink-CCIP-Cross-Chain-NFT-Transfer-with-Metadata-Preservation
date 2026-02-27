@@ -1,0 +1,12 @@
+[2026-02-27 16:38:59] INFO: Transfer started: tokenId=1 from=avalanche-fuji to=arbitrum-sepolia receiver=0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+[2026-02-27 16:39:00] INFO: Connected as: 0xE5c22fE12ecc70035C3B4e014e8cAdEF75782a80
+[2026-02-27 16:39:02] INFO: Estimated CCIP fee: 0.013851227025585273 LINK
+[2026-02-27 16:39:02] INFO: Approving LINK token for bridge...
+[2026-02-27 16:39:08] INFO: LINK approval tx: 0xdca823a2b58bf70b765c52d9ee4935dc495da0373ef0e8815f8d8a7adc437df5
+[2026-02-27 16:39:08] INFO: Approving NFT for bridge...
+[2026-02-27 16:39:17] INFO: NFT approval tx: 0xa97f8d1e9489335ddab8bc1360ffcef6c9d4f981d8b23ad286d880f9c27c0a8c
+[2026-02-27 16:39:17] INFO: Sending NFT via CCIP...
+[2026-02-27 16:39:27] INFO: SOURCE TX HASH: 0xa62f15ee82e58e71b2579af1f3a25d2f57490c7d4353f338cf3f70c813dfc771
+[2026-02-27 16:39:27] INFO: CCIP MESSAGE ID: 0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6
+[2026-02-27 16:39:27] INFO: Transfer initiated successfully. Track at: https://ccip.chain.link/msg/0x53a36a719a97bcd2a7235efaa0bdb61f2877e3894a05b7ebef68e9cc2f1b7af6
+[2026-02-27 16:39:27] INFO: Transfer record saved to data/nft_transfers.json
