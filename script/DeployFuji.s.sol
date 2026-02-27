@@ -21,12 +21,11 @@ contract DeployFuji is Script {
         CCIPNFTBridge bridge = new CCIPNFTBridge(CCIP_ROUTER_FUJI, LINK_TOKEN_FUJI, address(nft));
         console.log("CCIPNFTBridge deployed at:", address(bridge));
 
-        nft.setBridge(deployer);
-        nft.mint(deployer, 1, "https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json");
-        console.log("Minted tokenId=1 to deployer:", deployer);
-
         nft.setBridge(address(bridge));
         console.log("Bridge formally set on NFT contract");
+        
+        nft.mint(deployer, 1, "https://raw.githubusercontent.com/Rushikesh-5706/Chainlink-CCIP-Cross-Chain-NFT-Transfer-with-Metadata-Preservation/main/metadata/1.json");
+        console.log("Minted tokenId=1 to deployer:", deployer);
 
         vm.stopBroadcast();
     }
